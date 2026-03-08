@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Makes the website responsive on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Theme color used when installed as PWA -->
+    <meta name="theme-color" content="#f8f7f4">
+
+    <!-- Title of the app -->
+    <title>Reflect Journal</title>
+
+    <!-- Link to PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- TailwindCSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Import Google Font */
+        
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+        /* Body styling */
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #f8f7f4;
+            color: #262626;
+            min-height: 100vh;
+        }
+        /* Glass effect card */
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        /* Floating action button */
+        
+        .fab {
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        /* Hover animation for button */
+        
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+        /* Journal entry card */
+        
+        .entry {
+            padding: 20px;
+            border-radius: 20px;
+            background: white;
+        }
+    </style>
+</head>
+
+<body class="p-6 md:p-16 pb-32">
+
+    <!-- Main container -->
+    <div class="max-w-xl mx-auto">
+
+        <!-- Header section -->
+        <header class="mb-16">
+
+            <h1 class="text-4xl font-black text-stone-900 tracking-tighter italic">
+                REFLECT<span class="text-amber-500">.</span>
+            </h1>
+
+            <p class="text-stone-400 font-medium">
+                Documenting the quiet moments.
+            </p>
+
+        </header>
+
+        <!-- Where journal entries will appear -->
+        <div id="journalFeed" class="space-y-8"></div>
+
+    </div>
+
+
+    <!-- Floating Add Button -->
+    <button onclick="toggleModal()" class="fab fixed bottom-10 right-10 w-16 h-16 bg-stone-900 text-white rounded-full flex items-center justify-center z-50">
+
++
+
+</button>
+
+
+    <!-- Modal for writing journal entry -->
+    <div id="modal" class="fixed inset-0 bg-stone-900/20 backdrop-blur-md hidden flex items-center justify-center p-6 z-[100]">
+
+        <div class="glass-card w-full max-w-md rounded-[2.5rem] p-10 shadow-2xl">
+
+            <h2 class="text-2xl font-black mb-6">Today's Thought</h2>
+
+            <!-- Journal Title -->
+            <input type="text" id="entryTitle" placeholder="Title your day..." class="w-full p-4 bg-white rounded-2xl mb-4 outline-none">
+
+            <!-- Journal Text -->
+            <textarea id="entryText" placeholder="Start writing..." class="w-full p-4 bg-white rounded-2xl outline-none h-40 resize-none"></textarea>
+
+            <div class="flex gap-4 pt-4">
+
+                <!-- Cancel button -->
+                <button onclick="toggleModal()" class="flex-1 py-4 font-bold text-stone-400">
+Cancel
+</button>
+
+                <!-- Save entry -->
+                <button onclick="addEntry()" class="flex-1 bg-stone-900 text-white py-4 rounded-2xl font-bold">
+Store Memory
+</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Main javascript -->
+    <script src="app.js"></script>
+
+    <script>
+        // Register service worker for offline support
+        if ("serviceWorker" in navigator) {
+
+            navigator.serviceWorker.register("service-worker.js")
+
+        }
+    </script>
+
+</body>
+
+</html>
